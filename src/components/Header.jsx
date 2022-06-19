@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import '@styles/Header.scss';
-import logo from '@logos/desatados.png';
 import AppContext from '../context/AppContext';
 import { Link } from "react-router-dom";
 import close from '@icons/close.png';
 import dotMenu from '@icons/dotMenu.png';
+import cloud from '@logos/cloud.png';
 import { useHistory } from "react-router-dom"
 
 const Header = () => {
@@ -71,45 +71,26 @@ const Header = () => {
 	}, []);
 
 	return (
-		<nav className='z-10 items-center'>
+		<nav className='z-10 items-center d-flex'>
 			<img src={dotMenu} height='44' alt="menu" className={`menu hamb-menu-close ${openHambMenuClass}`} onClick={() => HandleMenu(!openMenu)} />
 			<div className="navbar-left">
 				<Link to='/'>
-					<img alt="logo" className="nav-logo" />
+					<img src={cloud} alt="logo" className="nav-logo" />
 				</Link>
 				<ul className={openMenuClass} style={{ overflowY: 'auto' }}>
 					<li onClick={() => HandleMenu(false)}>
-						{state.auth.user &&
-							<div className='col-10 flex-wrap center'>
-								<small className='center' style={{ textAlign: 'center' }}>
-									<strong className="col-10 center">
-										Bienvenido
-									</strong>
-									<em className="col-10 center">
-										{state.auth.user.substring(0, state.auth.user.indexOf('@'))}
-									</em>
-								</small>
-								<small style={{ color: 'darkblue' }} onClick={() => Logout()} className='p-1 hover'>
-									Salir
-								</small>
-							</div>
-							||
-							<Link to="/login">Login</Link>
-						}
 					</li>
-					{state.auth.role == 'admin' &&
-						<>
-
-						</>
-					}
-					<li className='secondary center' >
+					<li className='center' style={{textAlign: 'center'}}>
+					<Link to='/'>
+					Categorias de producto
+				</Link>
 					</li>
 				</ul>
 			</div>
 			<div className="navbar-right">
 				<ul>
 					<li className="navbar-email" onClick={handleToggle}>
-						Hola Rafa!
+						<Link to="/login">Iniciar sesion</Link>
 					</li>
 				</ul>
 			</div>

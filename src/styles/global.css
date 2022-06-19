@@ -1,11 +1,12 @@
 body {
-	padding-top: 100px;
+	padding-top: 75px;
 	max-height: 100vh;
-	overflow: hidden;
 	margin: 0;
 	font-family: 'Quicksand', sans-serif;
 }
-p{margin: 0;}
+p {
+	margin: 0;
+}
 .color-secondary{
 color: rgba(0,0,0,.5);
 }
@@ -27,8 +28,8 @@ a {
 	z-index: 10;
 }
 .layout{
-	height: calc(100vh - 100px);
-	overflow: scroll;
+	height: calc(100vh - 75px);
+	overflow-y: scroll;
 	align-content: baseline;
 }
 .success-text{

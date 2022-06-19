@@ -1,10 +1,9 @@
 import React from 'react';
-import Login from '@containers/Login';
-
+import cloud from '@logos/cloud.png';
+import Login from '@containers/Login'
 const Home = () => {
 	return (
-		<>
-		</>
+		<Login/>
 	);
 }
 
