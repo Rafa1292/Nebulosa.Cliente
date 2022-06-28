@@ -30,7 +30,7 @@ a {
 .layout{
 	height: calc(100vh - 75px);
 	overflow-y: scroll;
-	align-content: baseline;
+	align-content: center;
 }
 .success-text{
 	color: rgba(10, 159, 20, .7)
@@ -40,6 +40,10 @@ a {
 }
 .content-center{
 	align-content: center;
+}
+
+.text-center{
+	text-align: center;
 }
 .btn {
 	padding: 8px 10px;

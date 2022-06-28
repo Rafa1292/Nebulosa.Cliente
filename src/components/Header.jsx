@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import '@styles/Header.scss';
 import AppContext from '../context/AppContext';
 import { Link } from "react-router-dom";
-import close from '@icons/close.png';
 import dotMenu from '@icons/dotMenu.png';
 import cloud from '@logos/cloud.png';
 import { useHistory } from "react-router-dom"
@@ -15,9 +14,6 @@ const Header = () => {
 	const [openMenu, setOpenMenu] = useState(false);
 	const [openMenuClass, setOpenMenuClass] = useState('');
 	const [openHambMenuClass, setOpenHambMenuClass] = useState('');
-	const handleToggle = () => {
-		setToggle(!toggle);
-	}
 
 	const HandleMenu = (state) => {
 		setOpenMenu(state);
@@ -31,19 +27,8 @@ const Header = () => {
 		}
 	}
 
-	const HandleCart = (state) => {
-		setOpenStyle(state);
-		if (state) {
-			setOpenStyleClass({ right: 0 });
-		}
-		else {
-			setOpenStyleClass({});
-		}
-	}
-
 	const Logout = async () => {
 		localStorage.removeItem('token');
-		document.cookie = 'token=0';
 		HandleMenu(false);
 		resetAuthState();
 		history.push('/');
@@ -72,7 +57,7 @@ const Header = () => {
 
 	return (
 		<nav className='z-10 items-center d-flex'>
-			<img src={dotMenu} height='44' alt="menu" className={`menu hamb-menu-close ${openHambMenuClass}`} onClick={() => HandleMenu(!openMenu)} />
+			<img src={dotMenu} height='44' alt="menu" className={`menu hamb-menu-close ${openHambMenuClass}`} />
 			<div className="navbar-left">
 				<Link to='/'>
 					<img src={cloud} alt="logo" className="nav-logo" />
@@ -80,18 +65,24 @@ const Header = () => {
 				<ul className={openMenuClass} style={{ overflowY: 'auto' }}>
 					<li onClick={() => HandleMenu(false)}>
 					</li>
-					<li className='center' style={{textAlign: 'center'}}>
-					<Link to='/'>
-					Categorias de producto
-				</Link>
+					<li className='center' style={{ textAlign: 'center' }}>
+						<Link to='/'>
+							Categorias de producto
+						</Link>
 					</li>
 				</ul>
 			</div>
 			<div className="navbar-right">
 				<ul>
-					<li className="navbar-email" onClick={handleToggle}>
-						<Link to="/login">Iniciar sesion</Link>
-					</li>
+					{!state.auth.user &&
+						<li className="" >
+							<Link to="/login">Iniciar sesion</Link>
+						</li>
+						||
+						<li className="" onClick={Logout} >
+							<Link to="/">Cerrar sesion</Link>
+						</li>
+					}
 				</ul>
 			</div>
 		</nav>

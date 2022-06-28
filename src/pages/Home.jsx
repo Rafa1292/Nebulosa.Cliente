@@ -1,6 +1,6 @@
 import React from 'react';
 import cloud from '@logos/cloud.png';
-import Login from '@containers/Login'
+import Login from '@pages/Login'
 const Home = () => {
 	return (
 		<Login/>

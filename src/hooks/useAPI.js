@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const api = `http://localhost:3000/api/v1/`;
+const api = `https://localhost:7236/`;
 
 const useGetList = async (route) => {
     const list = await useCustom(route, 'get', {});
@@ -9,8 +9,12 @@ const useGetList = async (route) => {
 };
 
 const usePost = async (route, data) => {
-    const response = await useCustom(route, 'post', data);
-    return response;
+    try {
+        const response = await useCustom(route, 'post', data);
+        return response;        
+    } catch (error) {
+        
+    }
 }
 
 const useDelete = async (route) => {
@@ -49,7 +53,6 @@ const useCustom = async (route, method, data) => {
         return response;
 
     } catch (error) {
-        console.log(`error`)
         console.log(error)
     }
 }

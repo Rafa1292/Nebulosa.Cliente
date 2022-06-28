@@ -6,7 +6,6 @@ import Login from '@pages/Login';
 import PasswordRecovery from '@pages/PasswordRecovery';
 import SendEmail from '@pages/SendEmail';
 import NewPassword from '@pages/NewPassword';
-import MyAccount from '@pages/MyAccount';
 import NotFound from '@pages/NotFound';
 import CreateAccount from '@pages/CreateAccount';
 import AppContext from '../context/AppContext';
@@ -24,8 +23,7 @@ const App = () => {
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/password-recovery" component={PasswordRecovery} />
 						<Route exact path="/send-email" component={SendEmail} />
-						<Route exact path="/new-password" component={NewPassword} />
-						<Route exact path="/account" component={MyAccount} />
+						<Route exact path="/new-password/:token" component={NewPassword} />
 						<Route exact path="/signup" component={CreateAccount} />
 						<Route path="*" component={NotFound} />
 					</Switch>
