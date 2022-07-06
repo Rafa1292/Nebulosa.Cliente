@@ -4,6 +4,8 @@ import AppContext from '../context/AppContext';
 import { Link } from "react-router-dom";
 import dotMenu from '@icons/dotMenu.png';
 import cloud from '@logos/cloud.png';
+import user from '@icons/user.png';
+import exit from '@icons/exit.png';
 import { useHistory } from "react-router-dom"
 
 const Header = () => {
@@ -57,7 +59,7 @@ const Header = () => {
 
 	return (
 		<nav className='z-10 items-center d-flex'>
-			<img src={dotMenu} height='44' alt="menu" className={`menu hamb-menu-close ${openHambMenuClass}`} />
+			<img onClick={() => HandleMenu(!openMenu)} src={dotMenu} height='44' alt="menu" className={`menu hamb-menu-close ${openHambMenuClass}`} />
 			<div className="navbar-left">
 				<Link to='/'>
 					<img src={cloud} alt="logo" className="nav-logo" />
@@ -66,22 +68,25 @@ const Header = () => {
 					<li onClick={() => HandleMenu(false)}>
 					</li>
 					<li className='center' style={{ textAlign: 'center' }}>
-						<Link to='/'>
+						<Link to='/Categories'>
 							Categorias de producto
 						</Link>
 					</li>
+
 				</ul>
 			</div>
 			<div className="navbar-right">
 				<ul>
 					{!state.auth.user &&
-						<li className="" >
-							<Link to="/login">Iniciar sesion</Link>
-						</li>
+							<Link to="/login">
+							<img className='auth' src={user} height='45' style={{ opacity: '0.7' }} />
+							</Link>
 						||
-						<li className="" onClick={Logout} >
-							<Link to="/">Cerrar sesion</Link>
-						</li>
+						<>
+							<Link to="/" onClick={Logout}>
+								<img className='auth' src={exit} height='50' style={{ opacity: '0.7' }} />
+							</Link>
+						</>
 					}
 				</ul>
 			</div>

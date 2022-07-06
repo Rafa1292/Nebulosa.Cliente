@@ -11,7 +11,7 @@ nav {
 	justify-content: space-between;
 	padding: 1vh 2vw;
 	border-bottom: 1px solid var(--very-light-pink);
-	margin-bottom: 60px;
+	max-height: 75px;
 }
 .menu {
 	display: none;
@@ -99,6 +99,9 @@ nav {
 }
 .hamb-menu-open{
 	transform: rotate(90deg) !important;
+}
+.auth:hover{
+	opacity: 0.8 !important;
 }
 @media (max-width: 768px) {
 	.menu {

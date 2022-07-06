@@ -32,6 +32,33 @@ a {
 	overflow-y: scroll;
 	align-content: center;
 }
+
+.layout::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+    .layout::-webkit-scrollbar:vertical {
+        width: 5px;
+    }
+
+.layout::-webkit-scrollbar-button:increment, .contenedor::-webkit-scrollbar-button {
+    display: none;
+}
+
+.layout::-webkit-scrollbar:horizontal {
+    height: 5px;
+}
+
+.layout::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: none;
+}
+
+.layout::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
 .success-text{
 	color: rgba(10, 159, 20, .7)
 }
@@ -87,9 +114,48 @@ a {
 	background: transparent;
 }
 
+.error-container{
+	position: fixed;
+    background: rgba(185, 20, 10, 1);
+    color: white;
+    font-weight: bold;
+}
+
+.error-alert {
+	border: 1px solid rgba(255,255,255,.2);
+	display: flex;
+	width: 100%;
+	justify-content: center;
+    align-items: center;
+    max-height: 40px;
+    height: 40px;
+	position: relative;
+}
+
+
+.error-icon{
+	position: absolute;
+    right: 3vw;
+    top: 5px;
+    font-size: 20px;
+	color: rgba(255,255,255,.6);
+	cursor: pointer;
+
+}
+
 .danger {
 	color: white;
 	background-color: rgba(185, 20, 10, 1);
+}
+
+.table-row{
+	display: flex;
+	border-bottom: 1px solid rgba(0, 0, 0, .1);
+	width: 100%;
+}
+
+.table-striped-row{
+	background-color: rgba(0,0,0,.1);
 }
 
 .center {

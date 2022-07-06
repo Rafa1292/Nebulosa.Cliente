@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useGet } from '../hooks/useAPI';
 
 const initialState = {
+	errors: [],
 	auth: {
 		role: 'customer',
 		sub: 0,
@@ -15,9 +15,7 @@ const useInitialState = () => {
 	const setRole = async () => {
 		try {
 			const token = localStorage.getItem('token');
-			console.log(token)
 			if (token) {
-				console.log('si')
 				setState({
 					...state,
 					customerId: 1,
@@ -37,10 +35,41 @@ const useInitialState = () => {
 		setState(initialState);
 	}
 
+	const removeError = (id)=>{
+		setState({
+			...state,
+			errors: state.errors.filter(err => err.id != id)
+		})	}
+
+	const addError = (desc) => {
+		setState({
+			...state,
+			errors: [
+				...state.errors,
+				{
+					description: desc,
+					id: create_UUID()
+				}
+			]
+		})
+	}
+
+	function create_UUID(){
+		var dt = new Date().getTime();
+		var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			var r = (dt + Math.random()*16)%16 | 0;
+			dt = Math.floor(dt/16);
+			return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+		});
+		return uuid;
+	}
+
 	return {
 		state,
 		setRole,
-		resetAuthState
+		resetAuthState,
+		addError,
+		removeError
 	}
 }
 

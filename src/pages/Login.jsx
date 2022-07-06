@@ -1,17 +1,17 @@
 import React, { useRef, useContext, useState } from 'react';
-import { usePost } from '../hooks/useAPI';
+import useAPI from '../hooks/useAPI';
 import { useHistory } from "react-router-dom"
 import AppContext from '../context/AppContext';
 import { Link } from "react-router-dom";
 import Title from '@components/Title'
 
 const Login = () => {
+    const { usePost } = useAPI();
     const email = useRef('');
     const password = useRef('');
     const history = useHistory();
-    const { setRole } = useContext(AppContext);
+    const { setRole, addError } = useContext(AppContext);
     const { state } = useContext(AppContext);
-    const [message, setMessage] = useState("");
 
     const handleLogin = async () => {
         const hash = password.current.value;
@@ -21,15 +21,15 @@ const Login = () => {
             Contraseña: hash
         };
         const response = await usePost('Login', user);
-        if (response?.status == 200) {
+        if (!response.error) {
             localStorage.removeItem('token');
-            localStorage.setItem('token', response.data);
+            localStorage.setItem('token', response?.contenido);
             await setRole();
-            console.log(state)
             history.push('/');
         }
         else {
-            setMessage("Usuario o contraseña incorrectos");
+            var message = response?.error ? response.mensaje : "No hay conexion con el servidor";
+            addError(message);
         }
     }
 
@@ -39,7 +39,6 @@ const Login = () => {
                 <>
                     <div className='col-md-4 flex-wrap items-center center content-center' style={{ padding: '60px 60px', boxShadow: "0px 0px 10px 3px rgb(0 0 0 / 10%)" }}>
                         <Title title='Iniciar sesion' />
-                        <strong className='my-2 col-10 center' style={{ color: 'red' }}>{message}</strong>
                         <div className="col-10 center my-1">
                             <input className='input col-10' ref={email} type='email' placeholder='Email' />
                         </div>

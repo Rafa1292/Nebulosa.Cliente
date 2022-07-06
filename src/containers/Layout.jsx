@@ -1,9 +1,12 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import Header from '@components/Header';
 import AppContext from '../context/AppContext';
+import info from '@icons/info.png';
 
-const Layout = ({ children }) => {
-	const { setRole } = useContext(AppContext);
+const Layout = ({ children, errors = [] }) => {
+	const { setRole, removeError } = useContext(AppContext);
+
+
 
 	useEffect(async () => {
 		const token = localStorage.getItem('token');
@@ -11,11 +14,24 @@ const Layout = ({ children }) => {
 			await setRole();
 		}
 	}, []);
+
 	return (
-		<div className="layout center">
+		<>
 			<Header />
-			{children}
-		</div>
+				<div className="d-flex col-10 error-container">
+					{errors.map((error, i) => (
+						<span className={`error-alert`} key={error.id}>
+							{error.description}
+							<strong onClick={()=>removeError(error.id)} className='error-icon'>
+								x
+							</strong>
+						</span>
+					))}
+				</div>
+			<div className="layout center">
+				{children}
+			</div>
+		</>
 	);
 }
 

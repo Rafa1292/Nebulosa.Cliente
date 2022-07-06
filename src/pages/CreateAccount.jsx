@@ -1,10 +1,14 @@
-import React, {useRef} from 'react';
+import React, {useRef, useContext} from 'react';
+import AppContext from '../context/AppContext';
 import '@styles/CreateAccount.scss';
 import Title from '@components/Title';
-import { usePost } from '../hooks/useAPI';
+import useAPI from '../hooks/useAPI';
 import { useHistory } from "react-router-dom"
 
+
 const CreateAccount = () => {
+	const { addError } = useContext(AppContext);
+	const { usePost } = useAPI();
 	const history = useHistory();
     const email = useRef('');
     const name = useRef('');
@@ -17,12 +21,16 @@ const CreateAccount = () => {
             Contraseña: hash
         };
         const response = await usePost('Usuario/Agregue', user);
-        if (response.status == 200) {
+        if (!response.error) {
             history.push('/Login');
+        }
+		else {
+            var message = response?.error ? response.mensaje : "No hay conexion con el servidor";
+            addError(message);
         }
     }
 	return (
-		<div className="col-md-3 flex-wrap center" style={{padding: '60px 60px', boxShadow: "0px 0px 10px 3px rgb(0 0 0 / 10%)"}}>
+		<div className="col-md-3 items-center flex-wrap center" style={{ padding: '60px 60px'}}>
 			<Title title='Registrar nuevo usuario' />
 			<div className="col-10 py-1 center">
 				<input type="text" id="Nombre" ref={name} placeholder="Nombre" className="input col-10" />
