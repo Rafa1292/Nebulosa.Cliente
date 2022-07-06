@@ -1,11 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import AppContext from '../context/AppContext';
 import Title from '@components/Title';
 import useAPI from '../hooks/useAPI';
 
 const Categories = () => {
+    const { useGetList, usePost } = useAPI();
+    const { addError } = useContext(AppContext);
     const [categories, setCategories] = useState([]);
     const name = useRef("");
-    const { useGetList, usePost } = useAPI();
+    
     const getCategories = async () => {
         const response = await useGetList('CategoriaDeProducto/Liste');
         if (!response.error) {

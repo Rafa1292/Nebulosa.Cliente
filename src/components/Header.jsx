@@ -10,8 +10,6 @@ import { useHistory } from "react-router-dom"
 
 const Header = () => {
 	const history = useHistory();
-	const [openStyle, setOpenStyle] = useState(false);
-	const [openStyleClass, setOpenStyleClass] = useState({});
 	const { state, resetAuthState } = useContext(AppContext);
 	const [openMenu, setOpenMenu] = useState(false);
 	const [openMenuClass, setOpenMenuClass] = useState('');

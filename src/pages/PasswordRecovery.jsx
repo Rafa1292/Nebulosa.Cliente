@@ -1,14 +1,13 @@
 import React, { useRef, useContext } from 'react';
-import useAPI from '../hooks/useAPI';
 import { useHistory } from "react-router-dom"
-import '@styles/PasswordRecovery.scss';
+import useAPI from '../hooks/useAPI';
 import AppContext from '../context/AppContext';
+import '@styles/PasswordRecovery.scss';
 
 
 const PasswordRecovery = () => {
 	const { usePost } = useAPI();
 	const { addError } = useContext(AppContext);
-
 	const email = useRef("");
 	const history = useHistory();
 

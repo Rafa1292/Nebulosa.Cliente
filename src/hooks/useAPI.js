@@ -66,6 +66,7 @@ const useAPI = () => {
         useGetList,
         usePost,
         useGet,
+        useDelete,
         usePatch
     }
 }

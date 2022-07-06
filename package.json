@@ -12,7 +12,7 @@
     "react",
     "javascript"
   ],
-  "author": "Oscar Barajas <oscar@platzi.com>",
+  "author": "Nebulosa <admin@nebulosa.com>",
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.15.0",

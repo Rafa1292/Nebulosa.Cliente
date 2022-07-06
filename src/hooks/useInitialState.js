@@ -18,7 +18,6 @@ const useInitialState = () => {
 			if (token) {
 				setState({
 					...state,
-					customerId: 1,
 					auth: {
 						user: 'Rafa',
 						role: 'Admin',
@@ -32,7 +31,10 @@ const useInitialState = () => {
 	}
 
 	const resetAuthState = () => {
-		setState(initialState);
+		setState({
+			...state,
+			auth: initialState.auth
+		});
 	}
 
 	const removeError = (id)=>{
@@ -48,13 +50,13 @@ const useInitialState = () => {
 				...state.errors,
 				{
 					description: desc,
-					id: create_UUID()
+					id: createUUID()
 				}
 			]
 		})
 	}
 
-	function create_UUID(){
+	function createUUID(){
 		var dt = new Date().getTime();
 		var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 			var r = (dt + Math.random()*16)%16 | 0;

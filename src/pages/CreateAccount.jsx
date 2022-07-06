@@ -1,10 +1,9 @@
 import React, {useRef, useContext} from 'react';
 import AppContext from '../context/AppContext';
-import '@styles/CreateAccount.scss';
 import Title from '@components/Title';
 import useAPI from '../hooks/useAPI';
 import { useHistory } from "react-router-dom"
-
+import '@styles/CreateAccount.scss';
 
 const CreateAccount = () => {
 	const { addError } = useContext(AppContext);
@@ -29,6 +28,7 @@ const CreateAccount = () => {
             addError(message);
         }
     }
+	
 	return (
 		<div className="col-md-3 items-center flex-wrap center" style={{ padding: '60px 60px'}}>
 			<Title title='Registrar nuevo usuario' />

@@ -6,15 +6,13 @@ import { useHistory } from "react-router-dom"
 import AppContext from '../context/AppContext';
 
 const NewPassword = () => {
-	const { setRole, addError } = useContext(AppContext);
-
 	const { usePost } = useAPI();
+	const { addError } = useContext(AppContext);
 	const { token } = useParams();
+	const history = useHistory();
+	const mail = useRef("");
 	const password = useRef("");
 	const repeatPassword = useRef("");
-	const mail = useRef("");
-	const [message, setMessage] = useState("");
-	const history = useHistory();
 
 	const handleSubmit = async () => {
 		const data = {
@@ -24,7 +22,6 @@ const NewPassword = () => {
 		}
 		if (repeatPassword.current.value === password.current.value) {
 			const response = await usePost("RecupereLaContraseña", data)
-			console.log(response)
 			if (!response.error) {
 				history.push('/Login');
 			}
@@ -40,7 +37,6 @@ const NewPassword = () => {
 			<div className="center">
 				<h1 className="title col-10 text-center">Crear nueva contraseña</h1>
 				<p className="subtitle-newpassword my-1 col-10">Introduzca la nueva contraseña y el correo</p>
-				<span className='col-10 text-center' style={{ color: 'red' }}>{message}</span>
 				<div className="col-10 center my-1">
 					<input ref={mail} type="text" id="mail" placeholder="Correo" className="input input-email  col-md-4 m-1" />
 				</div>

@@ -1,17 +1,16 @@
 import React, { useRef, useContext, useState } from 'react';
 import useAPI from '../hooks/useAPI';
-import { useHistory } from "react-router-dom"
-import AppContext from '../context/AppContext';
-import { Link } from "react-router-dom";
 import Title from '@components/Title'
+import AppContext from '../context/AppContext';
+import { useHistory } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const Login = () => {
     const { usePost } = useAPI();
-    const email = useRef('');
+    const { setRole, addError, state } = useContext(AppContext);
     const password = useRef('');
+    const email = useRef('');
     const history = useHistory();
-    const { setRole, addError } = useContext(AppContext);
-    const { state } = useContext(AppContext);
 
     const handleLogin = async () => {
         const hash = password.current.value;
