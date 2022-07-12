@@ -26,7 +26,7 @@ const useAPI = () => {
     };
 
     const usePatch = async (route, data) => {
-        const response = await useCustom(route, 'patch', data);
+        const response = await useCustom(route, 'put', data);
         return response;
     }
 

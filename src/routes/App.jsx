@@ -8,9 +8,9 @@ import SendEmail from '@pages/SendEmail';
 import NewPassword from '@pages/NewPassword';
 import NotFound from '@pages/NotFound';
 import CreateAccount from '@pages/CreateAccount';
-import Categories from '@pages/Categories';
+import Categories from '@categories/CategoryList';
 import AppContext from '../context/AppContext';
-import useInitialState from '../hooks/useInitialState';
+import {useInitialState} from '../hooks/useInitialState';
 import '@styles/global.css';
 
 const App = () => {

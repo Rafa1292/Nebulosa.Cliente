@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
-import AppContext from '../context/AppContext';
+import React, { useState, useEffect, useRef } from 'react';
 import Title from '@components/Title';
-import useAPI from '../hooks/useAPI';
+import { useAPI } from '../../hooks/useInitialState';
+import CategoryItem from '../../components/CategoryItem';
 
 const Categories = () => {
     const { useGetList, usePost } = useAPI();
-    const { addError } = useContext(AppContext);
     const [categories, setCategories] = useState([]);
     const name = useRef("");
     
@@ -14,10 +13,6 @@ const Categories = () => {
         if (!response.error) {
             setCategories(response.contenido);
         }
-        else {
-            var message = response?.error ? response.mensaje : "No hay conexion con el servidor";
-            addError(message);
-        }
     }
 
     const addCategory = async () => {
@@ -25,10 +20,6 @@ const Categories = () => {
         if (!response?.error) {
             await getCategories();
             name.current.value = "";
-        }
-        else {
-            var message = response?.error ? response.mensaje : "No hay conexion con el servidor";
-            addError(message);
         }
     }
 
@@ -49,21 +40,13 @@ const Categories = () => {
                 </div>
             </div>
 
-            <div className="col-md-4 my-1 flex-wrap">
+            <div className="col-md-5 my-1 flex-wrap">
                 {categories.map((category, index) => (
-                    <div key={category.categoriaDeProductoId} className={`table-row ${index % 2 == 0 ? 'table-striped-row' : ''}`}>
-                        <div className="col-5 items-center center">
-                            {category.nombre}
-                        </div>
-                        <div className="col-5 center items-center">
-                            <button className='col-sm-3 m-1 btn' type={'button'}>
-                                Editar
-                            </button>
-                            <button className='col-sm-3 btn m-1 danger' type={'button'}>
-                                Eliminar
-                            </button>
-                        </div>
-                    </div>
+                   <CategoryItem 
+                   key={category.categoriaDeProductoId}
+                   getCategories={getCategories}
+                   category={category} 
+                   index={index} />
                 ))}
             </div>
         </div>
